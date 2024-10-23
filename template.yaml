@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: 'Risk monitor data Puh to SNS'
+Parameters:
+  Memory:
+    Type: Number
+    Default: "2024"
+    MinValue: "128"
+    MaxValue: "10248"
+  FunctionName:
+    Type: String
+    Default: "experiment-lambda"
+  LambdaTimeOut:
+    Type: Number
+    Default: "480"
+    MinValue: "1"
+    MaxValue: "900"
+Globals:
+  Function:
+    Environment:
+      Variables:
+        FUNCTION_NAME: pushDataToSNS
+        MAIN_CLASS: com.bdp.rmriskdata.Application
+Resources:
+  RMPublish:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html
+    Properties:
+      FunctionName: "experiment-lambda"
+      CodeUri: REPLACE_JAR_FILE
+      Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
+      Runtime: java17
+      MemorySize:
+        Ref: Memory
+      Timeout:
+        Ref: LambdaTimeOut
+      Tracing: Active
+      Policies:
+        - VPCAccessPolicy: {}
+        - Statement:
+          - Sid: LambdaPolicy
+            Effect: "Allow"
+            Action:
+            - ec2:DescribeInstances
+            - ec2:CreateNetworkInterface
+            - ec2:DescribeNetworkInterfaces
+            - ec2:DeleteNetworkInterface
+            - secretsmanager:GetRandomPassword
+            - secretsmanager:GetResourcePolicy
+            - secretsmanager:UntagResource
+            - secretsmanager:GetSecretValue
+            - secretsmanager:DescribeSecret
+            - secretsmanager:ListSecretVersionIds
+            - secretsmanager:ListSecrets
+            - secretsmanager:TagResource
+            - kms:Decrypt
+            - kms:GenerateDataKey
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+            - ec2:AssignPrivateIpAddresses
+            - ec2:UnassignPrivateIpAddresses
+            - sqs:ReceiveMessage
+            - sqs:DeleteMessage
+            - sqs:GetQueueAttributes
+            - sqs:ChangeMessageVisibility
+            Resource: '*'
