@@ -10,7 +10,7 @@ phases:
       - export JAR_FILE=`find . -type f -iname "*-aws.jar" | cut -c10-`
       - export S3_JAR_FILE="s3://$ARTIFACT_BUCKET/releases/$CODEBUILD_RESOLVED_SOURCE_VERSION/$JAR_FILE"
       - aws s3 cp $RAW_JAR_FILE $S3_JAR_FILE
-      - sed -i 's|REPLACE_JAR_FILE|'$S3_JAR_FILE'|g' dev-template.yaml
+      - sed -i 's|REPLACE_JAR_FILE|'$S3_JAR_FILE'|g' template.yaml
       - mv template.yaml packaged-template.yaml
 
 artifacts:
