@@ -9,7 +9,7 @@ Parameters:
     MaxValue: "10248"
   FunctionName:
     Type: String
-    Default: experiment-lambda
+    Default: experiment-lambda-test
   env:
    Type: String
    Default: dev
@@ -24,12 +24,12 @@ Globals:
       Variables:
         FUNCTION_NAME: pushDataToSNS
         MAIN_CLASS: com.bdp.rmriskdata.Application
-        TEST: test
+        SPRING_PROFILES_ACTIVE: test
 Resources:
   RMPublish:
     Type: AWS::Serverless::Function # More info about Function Resource: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html
     Properties:
-      FunctionName: "experiment-lambda"
+      FunctionName: experiment-lambda-test
       CodeUri: REPLACE_JAR_FILE
       Handler: org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest
       Runtime: java17
