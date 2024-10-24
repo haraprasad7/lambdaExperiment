@@ -38,9 +38,6 @@ Resources:
       Timeout:
         Ref: LambdaTimeOut
       Tracing: Active
-      Environment:
-        Variables:
-         Ref: env
       Policies:
         - VPCAccessPolicy: {}
         - Statement:
