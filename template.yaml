@@ -9,7 +9,10 @@ Parameters:
     MaxValue: "10248"
   FunctionName:
     Type: String
-    Default: "experiment-lambda"
+    Default: experiment-lambda
+  env:
+   Type: String
+   Default: dev
   LambdaTimeOut:
     Type: Number
     Default: "480"
@@ -21,6 +24,7 @@ Globals:
       Variables:
         FUNCTION_NAME: pushDataToSNS
         MAIN_CLASS: com.bdp.rmriskdata.Application
+        TEST: ${env}
 Resources:
   RMPublish:
     Type: AWS::Serverless::Function # More info about Function Resource: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html
