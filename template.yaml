@@ -23,8 +23,8 @@ Globals:
     Environment:
       Variables:
         FUNCTION_NAME: pushDataToSNS
-        MAIN_CLASS: com.bdp.rmriskdata.Application
-        TEST: test
+        MAIN_CLASS:  com.experiment.application.DemoApplication
+        SPRING_PROFILES_ACTIVE: dev
 Resources:
   RMPublish:
     Type: AWS::Serverless::Function # More info about Function Resource: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html

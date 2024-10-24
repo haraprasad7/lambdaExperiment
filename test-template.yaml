@@ -23,7 +23,7 @@ Globals:
     Environment:
       Variables:
         FUNCTION_NAME: pushDataToSNS
-        MAIN_CLASS: com.bdp.rmriskdata.Application
+        MAIN_CLASS: com.experiment.application.DemoApplication
         SPRING_PROFILES_ACTIVE: test
 Resources:
   RMPublish:
