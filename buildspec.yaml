@@ -13,9 +13,8 @@ phases:
       - sed -i 's|REPLACE_JAR_FILE|'$S3_JAR_FILE'|g' template.yaml
       - sed -i 's|REPLACE_JAR_FILE|'$S3_JAR_FILE'|g' test-template.yaml
       - mv template.yaml packaged-template.yaml
-      - mv test-template.yaml packaged-template-test.yaml
 
 artifacts:
   files:
     - packaged-template.yaml
-    - packaged-template-test.yaml
+    - test-template.yaml
